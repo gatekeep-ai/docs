@@ -1,0 +1,159 @@
+# Video API
+
+The Video API generates videos a text query into a video. Attached below are multiple examples in different programming languages to generate a video about **integration by parts**.
+
+## Endpoint
+
+**POST** https://vapi.gatekeep.ai/api/v2/video/gen
+
+## cURL
+
+```bash copy
+curl -X POST -H "Authorization: Bearer YOUR_API_KEY" --max-time 500 -H "Content-Type: application/json" -d '{"query": "integration by parts"}' https://vapi.gatekeep.ai/api/v2/video/gen
+```
+
+## Node.js
+
+```javascript copy
+const options = {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query: "integration by parts",
+  }),
+  timeout: 500,
+};
+
+fetch("https://vapi.gatekeep.ai/api/v2/video/gen", options)
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));
+```
+
+## Python
+
+```python copy
+import requests
+
+url = "https://vapi.gatekeep.ai/api/v2/video/gen"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+data = {
+    "query": "integration by parts"
+}
+timeout = 500
+
+response = requests.post(url, headers=headers, json=data, timeout=timeout)
+print(response.json())
+```
+
+## Java
+
+```java copy
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public static void main(String[] args) throws IOException, InterruptedException {
+    String apiKey = "YOUR_API_KEY";
+    String query = "integration by parts";
+    String url = "https://vapi.gatekeep.ai/api/v2/video/gen";
+    
+    String requestBody = "{\"query\": \"" + query + "\"}";
+    
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(url))
+        .header("Authorization", "Bearer " + apiKey)
+        .header("Content-Type", "application/json")
+        .timeout(java.time.Duration.ofMillis(500))
+        .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+        .build();
+
+    HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    System.out.println(response.body());
+}
+```
+
+## Rust
+
+```rust copy
+use reqwest::Client;
+use serde_json::json;
+use std::time::Duration;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let client = Client::new();
+    let response = client
+        .post("https://vapi.gatekeep.ai/api/v2/video/gen")
+        .header("Authorization", "Bearer YOUR_API_KEY")
+        .header("Content-Type", "application/json")
+        .timeout(Duration::from_millis(500))
+        .json(&json!({
+            "query": "integration by parts"
+        }))
+        .send()
+        .await?;
+
+    println!("{}", response.text().await?);
+    Ok(())
+}
+```
+
+## Go
+
+```go copy
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "time"
+)
+
+func main() {
+    client := &http.Client{
+        Timeout: 500 * time.Millisecond,
+    }
+
+    data := map[string]string{
+        "query": "integration by parts",
+    }
+    jsonData, _ := json.Marshal(data)
+
+    req, err := http.NewRequest("POST", "https://api.openai.com/v1/completions", bytes.NewBuffer(jsonData))
+    if err != nil {
+        fmt.Println("Error creating request:", err)
+        return
+    }
+
+    req.Header.Set("Content-Type", "application/json")
+    req.Header.Set("Authorization", "Bearer YOUR_API_KEY")
+
+    resp, err := client.Do(req)
+    if err != nil {
+        fmt.Println("Error sending request:", err)
+        return
+    }
+    defer resp.Body.Close()
+
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Println("Error reading response:", err)
+        return
+    }
+
+    fmt.Println("Response:", string(body))
+}
+
+```
