@@ -4,12 +4,12 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 const config: DocsThemeConfig = {
   logo: <span>Gatekeep Labs</span>,
   project: {
-    link: "https://github.com/shuding/nextra-docs-template",
+    link: "https://github.com/gatekeep-ai/docs",
   },
   chat: {
-    link: "https://discord.com",
+    link: "https://discord.gg/PsJqHehWjp",
   },
-  docsRepositoryBase: "https://github.com/shuding/nextra-docs-template",
+  docsRepositoryBase: "https://github.com/gatekeep-ai/docs",
   footer: {
     text: "Nextra Docs Template",
   },
